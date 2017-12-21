@@ -37,6 +37,7 @@ def build_config():
     config = {
         "branch": "stable",
         "branches": conf.BRANCHES,
+        "cache_dir": os.environ.get("XDG_CACHE_DIR"),
         "config_file": conf.CONFIG_FILE,
         "country_pool": [],
         "custom_file": conf.CUSTOM_FILE,
@@ -52,7 +53,10 @@ def build_config():
         "url_mirrors_json": conf.URL_MIRROR_JSON,
         "url_status_json": conf.URL_STATUS_JSON
     }
-    # try to replace default entries by reading conf file
+    if config["cache_dir"] == "":
+        config["cache_dir"] = "{}/.cache".format(os.environ.get("HOME"))
+    config["cache_dir"] = "/{}/pacman-mirrors".format(config["cache_dir"])
+    # replace default entries by reading conf file
     try:
         with open(config["config_file"]) as conf_file:
             for line in conf_file:
