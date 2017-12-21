@@ -29,7 +29,7 @@ from pacman_mirrors.constants import txt
 from pacman_mirrors.functions import jsonFn
 
 
-def check_existance_of(filename, folder=False):
+def check_existence_of(filename, folder=False):
     """
     Check existence of named file
     :param filename:
@@ -41,22 +41,22 @@ def check_existance_of(filename, folder=False):
     return os.path.isfile(filename)
 
 
-def create_dir(foldername):
+def create_dir(folder_name):
     """
     Create named folder if not exist
-    :param foldername:
+    :param folder_name:
     """
-    os.makedirs(foldername, mode=0o755, exist_ok=True)
+    os.makedirs(folder_name, mode=0o755, exist_ok=True)
 
 
-def delete_file(filename):
+def delete_file(file_name):
     """
     Delete the named file if exist
-    :param filename:
+    :param file_name:
     :return:
     """
-    if os.path.isfile(filename):
-        os.remove(filename)
+    if os.path.isfile(file_name):
+        os.remove(file_name)
 
 
 def return_mirror_filename(config):
@@ -68,10 +68,10 @@ def return_mirror_filename(config):
     filename = ""
     status = False  # status.json or mirrors.json
     # decision on file availablity
-    if check_existance_of(config["status_file"]):
+    if check_existence_of(config["status_file"]):
         status = True
         filename = config["status_file"]
-    elif check_existance_of(config["mirror_file"]):
+    elif check_existence_of(config["mirror_file"]):
         filename = config["mirror_file"]
     if not filename:
         print("\n{}.:! {}{}\n".format(color.RED,

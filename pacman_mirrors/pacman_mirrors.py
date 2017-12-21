@@ -350,7 +350,7 @@ class PacmanMirrors:
             """
             # pacman-mirrors.conf could absent so check for it
             """
-            if not fileFn.check_existance_of(self.config["config_file"]):
+            if not fileFn.check_existence_of(self.config["config_file"]):
                 """
                 # Copy from host system
                 """

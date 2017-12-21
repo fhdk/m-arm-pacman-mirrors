@@ -56,8 +56,8 @@ def download_mirrors(config):
         tempfile = config["work_dir"] + "/temp.file"
         jsonFn.json_dump_file(mirrorlist, tempfile)
         filecmp.clear_cache()
-        if fileFn.check_existance_of(conf.USR_DIR, folder=True):
-            if not fileFn.check_existance_of(config["mirror_file"]):
+        if fileFn.check_existence_of(conf.USR_DIR, folder=True):
+            if not fileFn.check_existence_of(config["mirror_file"]):
                 jsonFn.json_dump_file(mirrorlist, config["mirror_file"])
             elif not filecmp.cmp(tempfile, config["mirror_file"]):
                 jsonFn.json_dump_file(mirrorlist, config["mirror_file"])
@@ -200,7 +200,7 @@ def update_mirrors(config, quiet=False):
                                        txt.REPO_SERVER))
         result = download_mirrors(config)
     else:
-        if not fileFn.check_existance_of(config["status_file"]):
+        if not fileFn.check_existence_of(config["status_file"]):
             if not quiet:
                 print(".: {} {} {} {}".format(txt.WRN_CLR,
                                               txt.MIRROR_FILE,
@@ -210,7 +210,7 @@ def update_mirrors(config, quiet=False):
                                            txt.FALLING_BACK,
                                            conf.MIRROR_FILE))
             result = (True, False)
-        if not fileFn.check_existance_of(config["mirror_file"]):
+        if not fileFn.check_existence_of(config["mirror_file"]):
             if not quiet:
                 print(".: {} {}".format(txt.ERR_CLR, txt.HOUSTON))
             result = (False, False)
