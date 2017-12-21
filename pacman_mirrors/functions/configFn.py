@@ -25,6 +25,7 @@ import tempfile
 
 from pacman_mirrors.config import configuration as conf
 from pacman_mirrors.constants import txt
+from pacman_mirrors.functions import fileFn
 
 
 def build_config():
@@ -53,9 +54,11 @@ def build_config():
         "url_mirrors_json": conf.URL_MIRROR_JSON,
         "url_status_json": conf.URL_STATUS_JSON
     }
-    if config["cache_dir"] == "":
-        config["cache_dir"] = "{}/.cache".format(os.environ.get("HOME"))
-    config["cache_dir"] = "/{}/pacman-mirrors".format(config["cache_dir"])
+    config["cache_dir"] = "{}/pacman-mirrors".format(config["cache_dir"])
+    if config["cache_dir"] == "/pacman-mirrors":
+        config["cache_dir"] = "{}/.cache/pacman-mirrors".format(os.environ.get("HOME"))
+    if not fileFn.check_existence_of(config["cache_dir"], folder=True):
+        fileFn.create_dir(config["cache_dir"])
     # replace default entries by reading conf file
     try:
         with open(config["config_file"]) as conf_file:
