@@ -45,15 +45,15 @@ def custom_config_is_valid():
     # return valid
 
 
-def country_list_is_valid(onlycountry, countrylist):
+def country_list_is_valid(only_country, country_list):
     """Check if the list of countries are valid.
-    :param onlycountry: list of countries to check
-    :param countrylist: list of available countries
+    :param only_country: list of countries to check
+    :param country_list: list of available countries
     :return: True
     :rtype: bool
     """
-    for country in onlycountry:
-        if country not in countrylist:
+    for country in only_country:
+        if country not in country_list:
             print(".: {} {}{}: {}: '{}'".format(txt.WRN_CLR,
                                                 txt.OPTION,
                                                 txt.OPT_COUNTRY,
@@ -61,6 +61,6 @@ def country_list_is_valid(onlycountry, countrylist):
                                                 country))
             print(".: {} {}:".format(txt.INF_CLR,
                                      txt.AVAILABLE_COUNTRIES))
-            print("{}".format(", ".join(countrylist)))
+            print("{}".format(", ".join(country_list)))
             sys.exit(1)  # exit gracefully
     return True
