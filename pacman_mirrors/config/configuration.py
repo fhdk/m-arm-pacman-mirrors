@@ -41,3 +41,8 @@ REPO_ARCH = "/$repo/$arch"
 # special cases
 O_CUST_FILE = "/var/lib/pacman-mirrors/Custom"
 TO_BE_REMOVED = "/var/lib/pacman-mirrors/mirrors.json"
+# wayland support
+TEMP_CONFIG = "pacman-mirrors.conf"
+TEMP_CUSTOM = "custom-mirrors.json"
+TEMP_MIRROR = "mirrors.json"
+TEMP_STATUS = "status.json"
