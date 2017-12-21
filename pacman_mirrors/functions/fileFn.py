@@ -67,7 +67,7 @@ def return_mirror_filename(config):
     """
     filename = ""
     status = False  # status.json or mirrors.json
-    # decision on file availablity
+    # decision on file availability
     if check_existence_of(config["status_file"]):
         status = True
         filename = config["status_file"]
@@ -79,6 +79,14 @@ def return_mirror_filename(config):
                                       color.ENDCOLOR))
         sys.exit(3)
     return filename, status
+
+
+def root_move_files(source, destination):
+    root = ["/usr/bin/sudo"]
+    if not check_existence_of("/usr/bin/sudo"):
+        root = ["/bin/su", "--command"]
+
+    proc = os.subprocess.call([root, "mv", source, destination])
 
 
 def write_mirror_list(config, servers, custom=False,
