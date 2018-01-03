@@ -50,17 +50,17 @@ def download_mirrors(config):
     # mirrors.json
     try:
         with urlopen(config["url_mirrors_json"]) as response:
-            mirrorlist = json.loads(response.read().decode("utf8"),
+            mirror_data = json.loads(response.read().decode("utf8"),
                                     object_pairs_hook=collections.OrderedDict)
         fetchmirrors = True
-        tempfile = config["work_dir"] + "/temp.file"
-        jsonFn.json_dump_file(mirrorlist, tempfile)
+        tempfile = config["work_dir"] + "/mirrors.temp"
+        jsonFn.write_json_file(mirror_data, tempfile, True)
         filecmp.clear_cache()
         if fileFn.check_existance_of(conf.USR_DIR, folder=True):
             if not fileFn.check_existance_of(config["mirror_file"]):
-                jsonFn.json_dump_file(mirrorlist, config["mirror_file"])
+                jsonFn.write_json_file(mirror_data, config["mirror_file"], True)
             elif not filecmp.cmp(tempfile, config["mirror_file"]):
-                jsonFn.json_dump_file(mirrorlist, config["mirror_file"])
+                jsonFn.write_json_file(mirror_data, config["mirror_file"], True)
         os.remove(tempfile)
     except (HTTPException, json.JSONDecodeError, URLError):
         pass
@@ -74,7 +74,7 @@ def download_mirrors(config):
         jsonFn.write_json_file(statuslist, config["status_file"])
     except (HTTPException, json.JSONDecodeError, URLError):
         pass
-    # result
+    result
     return fetchmirrors, fetchstatus
 
 
@@ -200,16 +200,16 @@ def update_mirrors(config, quiet=False):
                                        txt.REPO_SERVER))
         result = download_mirrors(config)
     else:
-        if not fileFn.check_existance_of(config["status_file"]):
-            if not quiet:
-                print(".: {} {} {} {}".format(txt.WRN_CLR,
-                                              txt.MIRROR_FILE,
-                                              config["status_file"],
-                                              txt.IS_MISSING))
-                print(".: {} {} {}".format(txt.WRN_CLR,
-                                           txt.FALLING_BACK,
-                                           conf.MIRROR_FILE))
-            result = (True, False)
+        # if not fileFn.check_existance_of(config["status_file"]):
+        #     if not quiet:
+        #         print(".: {} {} {} {}".format(txt.WRN_CLR,
+        #                                       txt.MIRROR_FILE,
+        #                                       config["status_file"],
+        #                                       txt.IS_MISSING))
+        #         print(".: {} {} {}".format(txt.WRN_CLR,
+        #                                    txt.FALLING_BACK,
+        #                                    conf.MIRROR_FILE))
+        #     result = (True, False)
         if not fileFn.check_existance_of(config["mirror_file"]):
             if not quiet:
                 print(".: {} {}".format(txt.ERR_CLR, txt.HOUSTON))
