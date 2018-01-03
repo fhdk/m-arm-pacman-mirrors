@@ -22,7 +22,7 @@
 # http constants
 URL_MIRROR_JSON = \
     "https://raw.githubusercontent.com/fhdk/m-arm-web-repos/master/mirrors.json"
-URL_STATUS_JSON = "http://repo.manjaro.org/status.json"
+URL_STATUS_JSON = ""
 INET_CONN_CHECK_URLS = ["https://wikipedia.org",
                         "https://github.com",
                         "https://bitbucket.org"]
