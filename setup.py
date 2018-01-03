@@ -17,7 +17,7 @@ def update_mirror_file():
     """update mirrors.json from github"""
     countries = list()
     try:
-        with urlopen("https://github.com/manjaro/manjaro-web-repo/raw/master/mirrors.json") as response:
+        with urlopen("https://raw.githubusercontent.com/fhdk/m-arm-web-repos/master/mirrors.json") as response:
             countries = json.loads(response.read().decode("utf8"), object_pairs_hook=collections.OrderedDict)
     except (HTTPException, json.JSONDecodeError, URLError, timeout):
         pass
