@@ -57,7 +57,7 @@ class TestPacmanMirrors(unittest.TestCase):
             app.command_line_parse()
             httpFn.update_mirrors(app.config)
             app.load_all_mirrors()
-            app.build_fasttrack_mirror_list(app.fasttrack)
+            app.build_fast_track_mirror_list(app.fasttrack)
 
     @patch("os.getuid")
     @patch.object(configFn, "build_config")

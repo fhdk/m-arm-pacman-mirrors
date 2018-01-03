@@ -404,6 +404,21 @@
         "url": "http://mirror.rise.ph/manjaro/"
     },
     {
+        "country": "Poland",
+        "protocols": [
+            "http"
+        ],
+        "url": "http://mirror.chmuri.net/manjaro/"
+    },
+    {
+        "country": "Poland",
+        "protocols": [
+            "https",
+            "http"
+        ],
+        "url": "https://mirror.tuchola-dc.pl/manjaro/"
+    },
+    {
         "country": "Portugal",
         "protocols": [
             "ftp",
